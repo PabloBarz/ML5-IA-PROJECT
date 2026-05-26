@@ -1,0 +1,196 @@
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar{
+    width:18.75rem;
+    background:rgba(8,12,25,0.50);
+    border:0.1rem solid rgba(0,255,255,0.08);
+    border-radius:1.75rem;
+    padding:1.5625rem;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    backdrop-filter:blur(0.625rem);
+    box-shadow:
+        0 0 1.875rem rgba(0,255,255,0.05);
+}
+
+/* =========================
+   LOGO
+========================= */
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:1.125rem;
+    margin-bottom:2.5rem;
+}
+
+.logo-icon{
+    width:3.75rem;
+    height:3.75rem;
+    border-radius:1.125rem;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:1.75rem;
+
+    background:
+        linear-gradient(135deg,
+        #00e5ff,
+        #7b2fff);
+
+    box-shadow:
+        0 0 1.25rem rgba(0,255,255,0.35);
+}
+
+.logo-info h1{
+    font-size:1.5rem;
+    margin-bottom:0.3125rem;
+}
+
+.logo-info p{
+    color:#7f8ca3;
+    font-size:0.875rem;
+}
+
+/* =========================
+   MENU
+========================= */
+
+.menu{
+    display:flex;
+    flex-direction:column;
+    gap:0.9375rem;
+}
+
+/* =========================
+   MENU ITEM
+========================= */
+
+.menu-item{
+    width:100%;
+    border:none;
+    outline:none;
+    cursor:pointer;
+
+    display:flex;
+    align-items:center;
+    gap:1.125rem;
+    padding:1.125rem 1.25rem;
+    border-radius:1.125rem;
+    background:transparent;
+    color:#9ba7c2;
+    font-size:1rem;
+    transition:0.3s;
+}
+
+/* =========================
+   ICONS
+========================= */
+
+.menu-item i{
+    font-size:1.25rem;
+}
+
+/* =========================
+   HOVER
+========================= */
+
+.menu-item:hover{
+    background:rgba(0,255,255,0.08);
+    color:white;
+}
+
+/* =========================
+   ACTIVE
+========================= */
+
+.menu-item.active{
+    background:rgba(0,255,255,0.10);
+    color:white;
+    border-left:0.25rem solid #00e5ff;
+
+    box-shadow:
+        0 0 1.25rem rgba(0,255,255,0.10);
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.sidebar-footer{
+    display:flex;
+    flex-direction:column;
+    gap:1.875rem;
+}
+
+/* =========================
+   STATUS
+========================= */
+
+.status{
+    display:flex;
+    align-items:flex-start;
+    gap:0.9375rem;
+}
+
+.status-dot{
+    width:0.75rem;
+    height:0.75rem;
+    border-radius:50%;
+    margin-top:0.3125rem;
+
+    background:#00ff99;
+
+    box-shadow:
+        0 0 0.625rem #00ff99;
+}
+
+.status h3{
+    margin-bottom:0.3125rem;
+    font-size:0.9375rem;
+}
+
+.status p{
+    font-size:0.8125rem;
+    color:#7f8ca3;
+}
+
+/* =========================
+   DEVELOPER
+========================= */
+
+.developer{
+    display:flex;
+    align-items:center;
+    gap:0.9375rem;
+}
+
+.developer-avatar{
+    width:3.125rem;
+    height:3.125rem;
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:
+        linear-gradient(135deg,
+        #00e5ff,
+        #7b2fff);
+
+    font-size:1.25rem;
+}
+
+.developer h3{
+    margin-bottom:0.3125rem;
+    font-size:0.9375rem;
+}
+
+.developer p{
+    font-size:0.8125rem;
+    color:#7f8ca3;
+}

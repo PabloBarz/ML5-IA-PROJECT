@@ -1,0 +1,257 @@
+/* =========================
+   RESET
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+/* =========================
+   BODY
+========================= */
+
+body{
+    min-height:100vh;
+    font-family:Arial, Helvetica, sans-serif;
+
+    background:
+        radial-gradient(circle at top left,
+        rgba(0,255,255,0.10),
+        transparent 30%),
+
+        radial-gradient(circle at bottom right,
+        rgba(128,0,255,0.12),
+        transparent 30%),
+
+        #050816;
+
+    color:white;
+    overflow:hidden;
+}
+
+/* =========================
+   APP
+========================= */
+
+.app{
+    display:flex;
+    width:100%;
+    height:100vh;
+    padding:1.25rem;
+    gap:1.25rem;
+}
+
+/* =========================
+   CONTENT
+========================= */
+
+.content{
+    flex:1;
+    background:rgba(8,12,25,0.65);
+    border:0.1rem solid rgba(0,255,255,0.06);
+    border-radius:1.75rem;
+    padding:1.875rem;
+    backdrop-filter:blur(0.625rem);
+
+    box-shadow:
+        0 0 1.875rem rgba(0,255,255,0.04);
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.content-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    margin-bottom:1.875rem;
+}
+
+.content-header h2{
+    font-size:2.375rem;
+    margin-bottom:0.625rem;
+}
+
+.content-header p{
+    color:#7f8ca3;
+}
+
+/* =========================
+   CAMERA STATUS
+========================= */
+
+.camera-status{
+    display:flex;
+    align-items:center;
+    gap:0.625rem;
+    color:#9fdcff;
+}
+
+.camera-dot{
+    width:0.625rem;
+    height:0.625rem;
+    border-radius:50%;
+
+    background:#00ff99;
+    box-shadow:
+        0 0 0.625rem #00ff99;
+}
+
+/* =========================
+   VIEWER
+========================= */
+
+.viewer{
+    width:100%;
+    height:32.5rem;
+    border-radius:1.75rem;
+    position:relative;
+    overflow:hidden;
+    border:0.0625rem solid rgba(0,255,255,0.18);
+
+    background:
+        linear-gradient(
+        135deg,
+        rgba(0,229,255,0.08),
+        rgba(123,47,255,0.08)
+        ),
+
+        url("https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1600&auto=format&fit=crop")
+        center/cover;
+}
+
+/* =========================
+   VIEWER OVERLAY
+========================= */
+
+.viewer-overlay{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(0,0,0,0.35);
+    font-size:1.75rem;
+    letter-spacing:0.25rem;
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.cards{
+    margin-top:1.5625rem;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:1.25rem;
+}
+
+/* =========================
+   CARD
+========================= */
+
+.card{
+    background:rgba(15,20,35,0.75);
+    border:0.0625rem solid rgba(0,255,255,0.08);
+    border-radius:1.375rem;
+    padding:1.5625rem;
+    backdrop-filter:blur(0.625rem);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-0.25rem);
+    border-color:rgba(0,255,255,0.20);
+
+    box-shadow:
+        0 0 1.5625rem rgba(0,255,255,0.08);
+}
+
+.card h3{
+    font-size:0.9375rem;
+    color:#7f8ca3;
+    margin-bottom:0.9375rem;
+}
+
+.card p{
+    font-size:1.75rem;
+    font-weight:bold;
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 992px){
+
+    .app{
+        flex-direction:column;
+        height:auto;
+    }
+
+    .sidebar{
+        width:100%;
+    }
+
+    .content{
+        width:100%;
+    }
+
+    .viewer{
+        height:26rem;
+    }
+
+    .cards{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px){
+
+    body{
+        overflow:auto;
+    }
+
+    .app{
+        padding:1rem;
+        gap:1rem;
+    }
+
+    .content{
+        padding:1.25rem;
+    }
+
+    .content-header{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:1rem;
+    }
+
+    .content-header h2{
+        font-size:1.8rem;
+    }
+
+    .viewer{
+        height:20rem;
+    }
+
+    .viewer-overlay{
+        font-size:1.2rem;
+        text-align:center;
+        padding:1rem;
+    }
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+}
