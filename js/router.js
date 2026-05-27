@@ -1,4 +1,7 @@
-import { renderImageDetection }
+import {
+    renderImageDetection,
+    initImageDetection
+}
 from "./pages/imageDetection.js";
 
 import { renderLineTracking }
@@ -30,9 +33,17 @@ export function navigate(route){
     const render =
     routes[route];
 
+    let html = "";
+
     if(render){
 
-        appContent.innerHTML =
-        render();
+    html = render();
+    appContent.innerHTML =
+    html;
+
+    if(route === "image"){
+
+        initImageDetection();
     }
+}
 }

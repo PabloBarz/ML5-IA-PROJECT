@@ -14,23 +14,23 @@ export function renderImageDetection(){
             <div class="image-detection">
                 <div class="image-list">
 
-                    <button class="image-item active">
+                    <button class="image-item active" data-image="./assets/images/detector/perro.png">
                         <img src="./assets/images/detector/perro.png" alt="Perro">
                     </button>
 
-                    <button class="image-item">
+                    <button class="image-item" data-image="./assets/images/detector/gato.png">
                         <img src="./assets/images/detector/gato.png" alt="Gato">
                     </button>
 
-                    <button class="image-item">
+                    <button class="image-item" data-image="./assets/images/detector/jirafa.png">
                         <img src="./assets/images/detector/jirafa.png" alt="Jirafa">
                     </button>
 
-                    <button class="image-item">
+                    <button class="image-item" data-image="./assets/images/detector/control.png">
                         <img src="./assets/images/detector/control.png" alt="Control">
                     </button>
 
-                    <button class="image-item">
+                    <button class="image-item"  data-image="./assets/images/detector/borroso.png">
                         <img src="./assets/images/detector/borroso.png" alt="Borroso">
                     </button>
 
@@ -38,8 +38,7 @@ export function renderImageDetection(){
 
                 <div class="viewer-container">
                     <div class="image-preview">
-                        <img src="./assets/images/detector/jirafa.png"
-                            alt="Preview">
+                        <img id="preview-image" src="./assets/images/detector/jirafa.png" alt="Preview">
                     </div>
                 </div>
             </div>
@@ -72,5 +71,32 @@ export function renderImageDetection(){
             </div>
 
         `
+    });
+}
+
+export function initImageDetection(){
+
+    const imageItems =
+    document.querySelectorAll(".image-item");
+
+    const previewImage =
+    document.querySelector("#preview-image");
+
+    imageItems.forEach((item)=>{
+
+        item.addEventListener("click", ()=>{
+
+            imageItems.forEach((btn)=>{
+                btn.classList.remove("active");
+            });
+
+            item.classList.add("active");
+
+            const imageSrc =
+            item.dataset.image;
+
+            previewImage.src =
+            imageSrc;
+        });
     });
 }
