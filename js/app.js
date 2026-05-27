@@ -1,14 +1,32 @@
-import { renderImageDetection } 
-from "./pages/imageDetection.js";
+import { navigate }
+from "./router.js";
 
-const appContent = 
-document.getElementById("app-content");
+const menuItems =
+document.querySelectorAll(".menu-item");
+
+function initEvents(){
+
+    menuItems.forEach((item)=>{
+        item.addEventListener("click", ()=>{
+
+            menuItems.forEach((btn)=>{
+                btn.classList.remove("active");
+            });
+
+            item.classList.add("active");
+
+            const route =
+            item.dataset.route;
+
+            navigate(route);
+        });
+    });
+}
 
 function initApp(){
 
-    appContent.innerHTML = 
-    renderImageDetection();
-
+    navigate("image");
+    initEvents();
 }
 
 initApp();
