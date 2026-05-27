@@ -1,6 +1,12 @@
 import { renderViewerLayout }
 from "../components/viewerLayout.js";
 
+import {
+    loadMobileNet,
+    classifyImage
+}
+from "../models/mobilenet.js";
+
 export function renderImageDetection(){
 
     return renderViewerLayout({
@@ -38,7 +44,7 @@ export function renderImageDetection(){
 
                 <div class="viewer-container">
                     <div class="image-preview">
-                        <img id="preview-image" src="./assets/images/detector/jirafa.png" alt="Preview">
+                        <img id="preview-image" src="./assets/images/detector/perro.png" alt="Preview">
                     </div>
                 </div>
             </div>
@@ -54,13 +60,13 @@ export function renderImageDetection(){
                 </div>
 
                 <div class="card">
-                    <h3>Confianza</h3>
-                    <p>97.4%</p>
+                    <h3>Predicción</h3>
+                    <p id="prediction-value">---</p>
                 </div>
 
                 <div class="card">
-                    <h3>FPS</h3>
-                    <p>28.7</p>
+                    <h3>Confianza</h3>
+                    <p id="confidence-value">0%</p>
                 </div>
 
                 <div class="card">
@@ -74,7 +80,7 @@ export function renderImageDetection(){
     });
 }
 
-export function initImageDetection(){
+export async function initImageDetection(){
 
     const imageItems =
     document.querySelectorAll(".image-item");
@@ -82,11 +88,41 @@ export function initImageDetection(){
     const previewImage =
     document.querySelector("#preview-image");
 
+    const confidenceValue =
+    document.querySelector("#confidence-value");
+
+    const predictionValue =
+    document.querySelector("#prediction-value");
+
+    await loadMobileNet();
+
+    async function predictCurrentImage(){
+
+        const result =
+        await classifyImage(previewImage);
+
+        if(result){
+
+
+            predictionValue.textContent =
+            result.label;
+
+            confidenceValue.textContent =
+            `${(result.confidence * 100).toFixed(2)}%`;
+        }
+    }
+
+    previewImage.onload = ()=>{
+
+        predictCurrentImage();
+    };
+
     imageItems.forEach((item)=>{
 
         item.addEventListener("click", ()=>{
 
             imageItems.forEach((btn)=>{
+
                 btn.classList.remove("active");
             });
 
@@ -99,4 +135,6 @@ export function initImageDetection(){
             imageSrc;
         });
     });
+
+    predictCurrentImage();
 }
