@@ -19,7 +19,7 @@ export function renderViewerLayout(config){
         <div class="viewer">
 
             <div class="viewer-overlay">
-                <h3>${config.overlay}</h3>
+                ${config.overlay}
             </div>
 
         </div>

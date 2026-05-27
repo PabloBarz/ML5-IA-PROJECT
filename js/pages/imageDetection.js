@@ -8,8 +8,43 @@ export function renderImageDetection(){
         title:"Detector de Imágenes",
         description:"Reconocimiento de objetos con IA",
         status:"Sistema Activo",
-        overlay:"VISUALIZACIÓN IA",
-        
+
+        overlay:`
+
+            <div class="image-detection">
+                <div class="image-list">
+
+                    <button class="image-item active">
+                        <img src="./assets/images/detector/perro.png" alt="Perro">
+                    </button>
+
+                    <button class="image-item">
+                        <img src="./assets/images/detector/gato.png" alt="Gato">
+                    </button>
+
+                    <button class="image-item">
+                        <img src="./assets/images/detector/jirafa.png" alt="Jirafa">
+                    </button>
+
+                    <button class="image-item">
+                        <img src="./assets/images/detector/control.png" alt="Control">
+                    </button>
+
+                    <button class="image-item">
+                        <img src="./assets/images/detector/borroso.png" alt="Borroso">
+                    </button>
+
+                </div>
+
+                <div class="viewer-container">
+                    <div class="image-preview">
+                        <img src="./assets/images/detector/jirafa.png"
+                            alt="Preview">
+                    </div>
+                </div>
+            </div>
+        `,
+
         cards:`
 
             <div class="cards">
