@@ -1,15 +1,10 @@
-export async function setupCamera(video){
+export function setupP5Camera(p,width,height){
 
-    const stream =
-    await navigator.mediaDevices.getUserMedia({
-        video:true,
-        audio:false
-    });
+    const video =
+    p.createCapture(p.VIDEO);
 
-    video.srcObject =
-    stream;
-
-    await video.play();
+    video.size(width,height);
+    video.hide();
 
     return video;
 }

@@ -4,7 +4,10 @@ import {
 }
 from "./pages/imageDetection.js";
 
-import { renderLineTracking }
+import {
+    renderLineTracking,
+    initLineTracking
+}
 from "./pages/lineTracking.js";
 
 import { renderFaceDetection }
@@ -21,29 +24,33 @@ document.getElementById("app-content");
 
 const routes = {
 
-    image: renderImageDetection,
-    line: renderLineTracking,
+    image:{ 
+        render: renderImageDetection,
+        init: initImageDetection
+    },
+    line:{
+        render:renderLineTracking,
+        init:initLineTracking
+    },
     face: renderFaceDetection,
     teachable: renderTeachableMachine,
     alert: renderObjectAlert
 };
 
-export function navigate(route){
+export async function navigate(route){
 
-    const render =
+    const currentRoute =
     routes[route];
 
-    let html = "";
-
-    if(render){
-
-    html = render();
-    appContent.innerHTML =
-    html;
-
-    if(route === "image"){
-
-        initImageDetection();
+    if(!currentRoute){
+        return;
     }
-}
+
+    appContent.innerHTML =
+    currentRoute.render();
+
+    if(currentRoute.init){
+
+        await currentRoute.init();
+    }
 }
