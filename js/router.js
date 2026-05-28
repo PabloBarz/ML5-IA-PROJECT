@@ -11,7 +11,11 @@ import {
 }
 from "./pages/lineTracking.js";
 
-import { renderFaceDetection }
+import {
+    renderFaceDetection,
+    initFaceDetection,
+    destroyFaceDetection
+}
 from "./pages/faceDetection.js";
 
 import { renderTeachableMachine }
@@ -37,7 +41,9 @@ const routes = {
         destroy:destroyLineTracking
     },
     face:{
-        render:renderFaceDetection
+        render:renderFaceDetection,
+        init:initFaceDetection,
+        destroy:destroyFaceDetection
     },
 
     teachable:{
