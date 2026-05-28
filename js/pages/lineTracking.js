@@ -110,7 +110,7 @@ export async function initLineTracking(){
             handCount.textContent =
             currentHands.length;
 
-            for(let hand of currentHands){
+            /* for(let hand of currentHands){
 
                 for(let keypoint of hand.keypoints){
 
@@ -124,7 +124,28 @@ export async function initLineTracking(){
                         12
                     );
                 }
+            } */
+
+            if(currentHands.length === 2){
+
+                const index1 =
+                currentHands[0].keypoints[8];
+
+                const index2 =
+                currentHands[1].keypoints[8];
+
+                p.stroke(0,255,255);
+
+                p.strokeWeight(6);
+
+                p.line(
+                    index1.x,
+                    index1.y,
+                    index2.x,
+                    index2.y
+                );
             }
+
         };
     });
 }
