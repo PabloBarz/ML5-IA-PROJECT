@@ -6,7 +6,8 @@ from "./pages/imageDetection.js";
 
 import {
     renderLineTracking,
-    initLineTracking
+    initLineTracking,
+    destroyLineTracking
 }
 from "./pages/lineTracking.js";
 
@@ -22,6 +23,8 @@ from "./pages/objectAlert.js";
 const appContent =
 document.getElementById("app-content");
 
+let currentDestroy = null;
+
 const routes = {
 
     image:{ 
@@ -30,11 +33,20 @@ const routes = {
     },
     line:{
         render:renderLineTracking,
-        init:initLineTracking
+        init:initLineTracking,
+        destroy:destroyLineTracking
     },
-    face: renderFaceDetection,
-    teachable: renderTeachableMachine,
-    alert: renderObjectAlert
+    face:{
+        render:renderFaceDetection
+    },
+
+    teachable:{
+        render:renderTeachableMachine
+    },
+
+    alert:{
+        render:renderObjectAlert
+    }
 };
 
 export async function navigate(route){
@@ -46,11 +58,18 @@ export async function navigate(route){
         return;
     }
 
+    if(currentDestroy){
+        currentDestroy();
+        currentDestroy = null;
+    }
+
+
     appContent.innerHTML =
     currentRoute.render();
 
     if(currentRoute.init){
 
         await currentRoute.init();
+        currentDestroy = currentRoute.destroy;
     }
 }

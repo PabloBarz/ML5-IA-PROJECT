@@ -9,6 +9,8 @@ from "../core/camera.js";
 
 let p5Instance;
 let currentHands = [];
+let video;
+let detectionInterval;
 
 export function renderLineTracking(){
 
@@ -72,14 +74,7 @@ export async function initLineTracking(){
     handStatus.textContent =
     "Modelo cargado";
 
-    if(p5Instance){
-        p5Instance.remove();
-    }
-
     p5Instance = new p5((p)=>{
-
-
-        let video;
 
         p.setup = async ()=>{
 
@@ -89,7 +84,7 @@ export async function initLineTracking(){
             canvas.parent(container);
             video = setupP5Camera(p,640,480);
 
-            setInterval(async ()=>{
+            detectionInterval = setInterval(async ()=>{
 
                 currentHands =
                 await detectHands(video.elt);
@@ -148,4 +143,31 @@ export async function initLineTracking(){
 
         };
     });
+}
+
+export function destroyLineTracking(){
+
+    if(video && video.elt.srcObject){
+
+        const tracks =
+        video.elt.srcObject.getTracks();
+
+        tracks.forEach((track)=>{
+            track.stop();
+        });
+    }
+
+    if(detectionInterval){
+        clearInterval(detectionInterval);
+    }
+
+    if(p5Instance){
+        p5Instance.remove();
+    }
+
+    currentHands = [];
+
+    detectionInterval = null;
+    video = null;
+    p5Instance = null;
 }
