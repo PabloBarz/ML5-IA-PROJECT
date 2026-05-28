@@ -45,6 +45,7 @@ export function renderImageDetection(){
                 <div class="viewer-container">
                     <div class="image-preview">
                         <img id="preview-image" src="./assets/images/detector/perro.png" alt="Preview">
+                        <canvas id="preview-canvas"></canvas>
                     </div>
                 </div>
             </div>
@@ -66,12 +67,12 @@ export function renderImageDetection(){
 
                 <div class="card">
                     <h3>Confianza</h3>
-                    <p id="confidence-value">0%</p>
+                    <p id="confidence-value">---</p>
                 </div>
 
                 <div class="card">
-                    <h3>Resolución</h3>
-                    <p>640x480</p>
+                    <h3>Resolución Original</h3>
+                    <p id="resolution-value">---</p>
                 </div>
 
             </div>
@@ -94,22 +95,83 @@ export async function initImageDetection(){
     const predictionValue =
     document.querySelector("#prediction-value");
 
+    const resolutionValue =
+    document.querySelector("#resolution-value");
+
     await loadMobileNet();
 
+    const canvas =
+    document.querySelector("#preview-canvas");
+
+    const ctx =
+    canvas.getContext("2d");
+
+    function resizeCanvas(){
+
+        canvas.width =
+        previewImage.clientWidth;
+
+        canvas.height =
+        previewImage.clientHeight;
+    }
+
     async function predictCurrentImage(){
+
+        resizeCanvas();
+
+        ctx.clearRect(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
 
         const result =
         await classifyImage(previewImage);
 
-        if(result){
+        resolutionValue.textContent =
+        `${previewImage.naturalWidth}x${previewImage.naturalHeight}`;
 
+        if(!result){
+            return;
+        }
+
+        if(result.confidence < 0.5){
 
             predictionValue.textContent =
-            result.label;
+            "---";
 
             confidenceValue.textContent =
-            `${(result.confidence * 100).toFixed(2)}%`;
+            "---";
+
+
+
+            ctx.fillStyle =
+            "#ff004c";
+
+            ctx.font =
+            "bold 10rem Arial";
+
+            ctx.textAlign =
+            "center";
+
+            ctx.textBaseline =
+            "middle";
+
+            ctx.fillText(
+                "?",
+                canvas.width / 2,
+                canvas.height / 2
+            );
+
+            return;
         }
+
+        predictionValue.textContent =
+        result.label;
+
+        confidenceValue.textContent =
+        `${(result.confidence * 100).toFixed(2)}%`;
     }
 
     previewImage.onload = ()=>{
