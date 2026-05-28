@@ -5,7 +5,6 @@ export async function loadHandPose(){
     handPoseModel =
     await ml5.handPose({
         maxHands:2,
-        flipped:true
     });
 
     return handPoseModel;

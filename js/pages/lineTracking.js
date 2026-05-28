@@ -8,6 +8,7 @@ import { setupP5Camera }
 from "../core/camera.js";
 
 let p5Instance;
+let currentHands = [];
 
 export function renderLineTracking(){
 
@@ -71,7 +72,12 @@ export async function initLineTracking(){
     handStatus.textContent =
     "Modelo cargado";
 
+    if(p5Instance){
+        p5Instance.remove();
+    }
+
     p5Instance = new p5((p)=>{
+
 
         let video;
 
@@ -82,23 +88,43 @@ export async function initLineTracking(){
 
             canvas.parent(container);
             video = setupP5Camera(p,640,480);
+
+            setInterval(async ()=>{
+
+                currentHands =
+                await detectHands(video.elt);
+
+                console.log(currentHands);
+
+            },10);
         };
 
-        p.draw = async ()=>{
+        p.draw = ()=>{
 
             p.background(0);
 
-            if(video.loadedmetadata){
+            if(video){
                 p.image(video, 0, 0);
             }
 
-            const hands =
-            await detectHands(video);
-
             handCount.textContent =
-            hands.length;
+            currentHands.length;
 
-            console.log(hands);
+            for(let hand of currentHands){
+
+                for(let keypoint of hand.keypoints){
+
+                    p.fill(0,255,255);
+
+                    p.noStroke();
+
+                    p.circle(
+                        keypoint.x,
+                        keypoint.y,
+                        12
+                    );
+                }
+            }
         };
     });
 }
